@@ -80,12 +80,12 @@ def setup_tulip(ip, services, ports, interface):
     #TICK_START -> An ISO 8601 date representing when the CTF started (YYYY-MM-DDTHH:MM+HH:MM) (e.g. 2023-11-18T18:00+01:00, means 18 november 2023 at 18:00 with +1 timezone, if it was UTC timezone it would be at 17:00).
     #TICK_LENGTH -> Frequency of ticks. (e.g. 18000 means a tick every 18000 ms) 
 
-    file.write("FLAG_REGEX = SAAR\{[A-Za-z0-9-_]{32}\}\n".encode())
-    file.write("TULIP_MONGO = mongo:27017\n".encode())
-    file.write("TRAFFIC_DIR_HOST = ./services/test_pcap\n".encode())
-    file.write("TRAFFIC_DIR_DOCKER = /traffic\n".encode())
-    file.write("TICK_START = 2023-11-18T18:00+01:00\n".encode())
-    file.write("TICK_LENGTH = 18000\n".encode())
+    file.write('FLAG_REGEX="SAAR\{[A-Za-z0-9-_]{32}\}"\n'.encode())
+    file.write('TULIP_MONGO="mongo:27017"\n'.encode())
+    file.write('TRAFFIC_DIR_HOST="./services/test_pcap"\n'.encode())
+    file.write('TRAFFIC_DIR_DOCKER="/traffic"\n'.encode())
+    file.write('TICK_START="2023-11-18T18:00+01:00"\n'.encode())
+    file.write('TICK_LENGTH="18000"\n'.encode())
     file.close()
 
     ## modify file docker-compose.yml
