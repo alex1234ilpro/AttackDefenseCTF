@@ -36,6 +36,7 @@ def start_capture(interface):
     ## start capture
     subprocess.run(f"cp /capture.py /ctf/", shell=True)
     subprocess.run(f"mkdir -p /ctf/pcaps", shell=True)
+    subprocess.run(f"mkdir -p /ctf/test_pcap", shell=True)
     subprocess.run(f"sudo screen -dmS capture python3 /ctf/capture.py {interface} root", shell=True)
 
 
