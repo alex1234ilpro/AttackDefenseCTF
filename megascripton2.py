@@ -8,8 +8,8 @@ import argparse
 def iptables_rules(ports, ip):
     for port in ports:
         print(f"Adding rule for port {port}")
-        subprocess.run(f"sudo iptables -A INPUT -p tcp -s {ip} --dport {port} -j NFQUEUE --queue-num 1 --queue-bypass", shell=True)
-        subprocess.run(f"sudo iptables -A OUTPUT -p tcp -d {ip} --sport {port} -j NFQUEUE --queue-num 1 --queue-bypass", shell=True)
+        subprocess.run(f"sudo iptables -A INPUT -p tcp --dport {port} -j NFQUEUE --queue-num 1 --queue-bypass", shell=True)
+        subprocess.run(f"sudo iptables -A OUTPUT -p tcp -s {ip} --sport {port} -j NFQUEUE --queue-num 1 --queue-bypass", shell=True)
         print(f"sudo iptables -A INPUT -p tcp -s {ip} --dport {port} -j NFQUEUE --queue-num 1 --queue-bypass")
         print(f"sudo iptables -A OUTPUT -p tcp -d {ip} --sport {port} -j NFQUEUE --queue-num 1 --queue-bypass")
 
