@@ -24,7 +24,7 @@ def install_services():
 
 def setup_tulip(ip, services, ports, interface):
     subprocess.run("cd /", shell=True)
-    subprocess.run("git clone https://github.com/mcap0/AttackDefenseCTF", shell=True)
+    subprocess.run("git clone https://github.com/mcap0/AttackDefenseCTF /AttackDefenseCTF", shell=True)
     subprocess.run("cd /AttackDefenseCTF", shell=True)
     subprocess.run("cp /AttackDefenseCTF/suricata.yaml /", shell=True)
     subprocess.run("cp /AttackDefenseCTF/capture.py /", shell=True)
