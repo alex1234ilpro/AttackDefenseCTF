@@ -102,7 +102,7 @@ def start_suricata():
     file = open("/ctf/ipsrules/local.rules", "wb")
     file.write('alert tcp any any -> any any (msg: "Path Traversal-../"; content: "../"; metadata: tag path_traversal; sid:2; rev: 2;)'.encode())
     file.close()
-    subprocess.run("sudo screen -dmS surica suricata -c /etc/suricata/suricata.yaml -q 0", shell=True)
+    subprocess.run("sudo screen -dmS surica suricata -c /etc/suricata/suricata.yaml -q 1", shell=True)
 
 
 
