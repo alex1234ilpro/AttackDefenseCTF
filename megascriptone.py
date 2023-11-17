@@ -128,6 +128,7 @@ def main():
     print(f"{interface=}")
 
     subprocess.run("set -x", shell=True)
+    subprocess.run("apt update", shell=True)
 
     ## adding iptables rules
     print("Adding iptables rules")
