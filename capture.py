@@ -42,7 +42,7 @@ def runner():
         
 if __name__ == "__main__":
     #TODO: TRY ME!
-    subprocess.Popen(["sudo", "tcpdump", "-i", INTERFACE, "-w",f"{LOG_DIR}/log.%FT%T.pcap", "-G", "3", "-Z", "root"])
+    subprocess.Popen(["sudo", "tcpdump", "-i", INTERFACE, "-w",f"{LOG_DIR}/log.%FT%T.pcap", "-G", "30", "-Z", "root"])
     if not os.path.exists(os.path.join(DEST_DIR, "eve.json")):
         os.link(os.path.join(EVE_FILE), os.path.join(DEST_DIR, "eve.json"))
     while True:
