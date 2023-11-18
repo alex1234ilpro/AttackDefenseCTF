@@ -91,7 +91,7 @@ def setup_tulip(ip, services, ports, interface):
     ## modify file docker-compose.yml
     subprocess.run(f"cd /ctf/tulip", shell=True)
     subprocess.run(f"mv /docker-compose.yml /ctf/tulip/docker-compose.yml", shell=True)
-    subprocess.run(f"docker-compose up --build -d", shell=True)
+    subprocess.run(f"cd /ctf/tulip; docker-compose up --build -d", shell=True)
 
 
 def start_suricata():
