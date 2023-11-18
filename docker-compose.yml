@@ -35,7 +35,7 @@ services:
     networks:
       - internal
     volumes:
-      - ${TRAFFIC_DIR_HOST}:${TRAFFIC_DIR_DOCKER}:ro
+      - ./services/test_pcap:/traffic:ro
     environment:
       TULIP_MONGO: mongo:27017
       TULIP_TRAFFIC_DIR: ${TRAFFIC_DIR_DOCKER}
@@ -53,7 +53,7 @@ services:
     networks:
       - internal
     volumes:
-      - ${TRAFFIC_DIR_HOST}:${TRAFFIC_DIR_DOCKER}:ro
+      - ./services/test_pcap:/traffic:ro
     command: "./assembler -dir ${TRAFFIC_DIR_DOCKER}"
     environment:
       TULIP_MONGO: ${TULIP_MONGO}
@@ -70,7 +70,7 @@ services:
     networks:
       - internal
     volumes:
-      - ${TRAFFIC_DIR_HOST}:${TRAFFIC_DIR_DOCKER}:ro
+      - ./services/test_pcap:/traffic:ro
     command: "./enricher -t 5 -eve ${TRAFFIC_DIR_DOCKER}/eve.json"
     environment:
       TULIP_MONGO: ${TULIP_MONGO}
