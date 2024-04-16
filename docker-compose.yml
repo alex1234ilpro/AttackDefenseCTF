@@ -1,7 +1,7 @@
 version: "3.2"
 services:
   mongo:
-    image: mongo:4.4.18
+    image: mongo:5
     networks:
       - internal
     restart: always
@@ -13,8 +13,9 @@ services:
       context: frontend
       dockerfile: Dockerfile-frontend
     image: tulip-frontend:latest
+    restart: unless-stopped
     ports:
-      - "127.0.0.1:3333:3000"
+      - "3000:3000"
     depends_on:
       - mongo
     networks:
@@ -24,18 +25,16 @@ services:
 
   api:
     build:
-      context: .
-      dockerfile: Dockerfile-python
+      context: services/api
+      dockerfile: Dockerfile-api
     image: tulip-api:latest
-    ports:
-      - "127.0.0.1:5005:5000"
+    restart: unless-stopped
     depends_on:
       - mongo
-    restart: always
     networks:
       - internal
     volumes:
-      - ./services/test_pcap:/traffic:ro
+      - ${TRAFFIC_DIR_HOST}:${TRAFFIC_DIR_DOCKER}:ro
     environment:
       TULIP_MONGO: mongo:27017
       TULIP_TRAFFIC_DIR: ${TRAFFIC_DIR_DOCKER}
@@ -48,29 +47,34 @@ services:
       context: services/go-importer
       dockerfile: Dockerfile-assembler
     image: tulip-assembler:latest
+    restart: unless-stopped
     depends_on:
       - mongo
     networks:
       - internal
     volumes:
-      - ./services/test_pcap:/traffic:ro
+      - ${TRAFFIC_DIR_HOST}:${TRAFFIC_DIR_DOCKER}:ro
     command: "./assembler -dir ${TRAFFIC_DIR_DOCKER}"
     environment:
       TULIP_MONGO: ${TULIP_MONGO}
       FLAG_REGEX: ${FLAG_REGEX}
+      PCAP_OVER_IP: ${PCAP_OVER_IP}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
 
   enricher:
     build:
       context: services/go-importer
       dockerfile: Dockerfile-enricher
     image: tulip-enricher:latest
+    restart: unless-stopped
     depends_on:
       - mongo
-    restart: always
     networks:
       - internal
     volumes:
-      - ./services/test_pcap:/traffic:ro
+      - ${TRAFFIC_DIR_HOST}:${TRAFFIC_DIR_DOCKER}:ro
     command: "./enricher -t 5 -eve ${TRAFFIC_DIR_DOCKER}/eve.json"
     environment:
       TULIP_MONGO: ${TULIP_MONGO}
