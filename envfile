@@ -2,10 +2,10 @@ FLAG_REGEX="[A-Z0-9]{31}(?:%3D|=)?"
 TULIP_MONGO="mongo:27017"
 
 # The location of your pcaps as seen by the host
-TRAFFIC_DIR_HOST="/var/log/suricata"
+TRAFFIC_DIR_HOST="/ctf/tulip/services/test_pcap"
 
 # The location of your pcaps (and eve.json), as seen by the container
-TRAFFIC_DIR_DOCKER="/services/test_pcap"
+TRAFFIC_DIR_DOCKER="/traffic"
 
 # Start time of the CTF (or network open if you prefer)
 TICK_START="2018-06-27T13:00+02:00"
