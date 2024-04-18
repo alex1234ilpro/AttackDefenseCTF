@@ -24,6 +24,9 @@ sudo apt update -y
 ## GIT INSTALL
 sudo apt install git -y
 
+## TCPDUMP INSTALL
+sudo apt install tcpdump -y
+
 ## SURICATA INSTALL
 sudo add-apt-repository ppa:oisf/suricata-stable -y
 sudo apt install suricata jq -y
